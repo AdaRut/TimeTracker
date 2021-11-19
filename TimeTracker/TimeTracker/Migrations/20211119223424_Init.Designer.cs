@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TimeTracker.Entities;
+using TimeTracker;
 
 namespace TimeTracker.Migrations
 {
     [DbContext(typeof(TimeTrackerDbContext))]
-    [Migration("20211117211901_InitCorrected")]
-    partial class InitCorrected
+    [Migration("20211119223424_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,23 +34,32 @@ namespace TimeTracker.Migrations
                     b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("DateFrom")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateTo")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("ModificationDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("ModifiedBy")
                         .HasColumnType("int");
 
-                    b.Property<int?>("userId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ActivityTemplateId");
 
-                    b.HasIndex("userId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Activities");
                 });
@@ -68,8 +77,17 @@ namespace TimeTracker.Migrations
                     b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("ModificationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("ModifiedBy")
                         .HasColumnType("int");
@@ -79,14 +97,14 @@ namespace TimeTracker.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("userId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("userId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("ActivityTemplates");
                 });
@@ -158,16 +176,18 @@ namespace TimeTracker.Migrations
                     b.HasOne("TimeTracker.Entities.ActivityTemplate", "ActivityTemplate")
                         .WithMany("Activities")
                         .HasForeignKey("ActivityTemplateId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("TimeTracker.Entities.User", "user")
+                    b.HasOne("TimeTracker.Entities.User", "User")
                         .WithMany("Activities")
-                        .HasForeignKey("userId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("ActivityTemplate");
 
-                    b.Navigation("user");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("TimeTracker.Entities.ActivityTemplate", b =>
@@ -178,13 +198,15 @@ namespace TimeTracker.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TimeTracker.Entities.User", "user")
+                    b.HasOne("TimeTracker.Entities.User", "User")
                         .WithMany("ActivityTemplates")
-                        .HasForeignKey("userId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("Category");
 
-                    b.Navigation("user");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("TimeTracker.Entities.ActivityTemplate", b =>
