@@ -12,6 +12,8 @@ CONTENTS OF THIS FILE
 
  CONFIGURATION
 ------------
-To Create Database write in NugetPackageConsole:
+
+To create migration from existing code:
 add-migration [nameOfMigration]
+To Create Database from migration, write in NugetPackageConsole:
 update-database

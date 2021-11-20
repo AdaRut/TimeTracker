@@ -8,6 +8,7 @@ namespace TimeTracker.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
+            builder.HasKey(r => r.Id);
             builder.Property(r => r.Name)
                  .IsRequired()
                  .HasMaxLength(50);
@@ -18,20 +19,21 @@ namespace TimeTracker.Configurations
                 .IsRequired()
                 .HasMaxLength(50);
             builder.Property(r => r.Role)
-                .IsRequired().HasMaxLength(5);
+                .IsRequired()
+                .HasMaxLength(5);
             builder.Property(r => r.Login)
                 .IsRequired()
                 .HasMaxLength(50);
             builder.Property(r => r.Password)
                 .IsRequired()
                 .HasMaxLength(25);
-            builder.HasMany(p => p.ActivityTemplates)
-                .WithOne(p => p.User)
-                .HasForeignKey(p => p.UserId)
+            builder.HasMany(r => r.ActivityTemplates)
+                .WithOne(r => r.User)
+                .HasForeignKey(r => r.UserId)
                 .OnDelete(DeleteBehavior.NoAction); ;
-            builder.HasMany(p => p.Activities)
-                .WithOne(p => p.User)
-                .HasForeignKey(p => p.UserId)
+            builder.HasMany(r => r.Activities)
+                .WithOne(r => r.User)
+                .HasForeignKey(r => r.UserId)
                 .OnDelete(DeleteBehavior.NoAction); 
         }
     }

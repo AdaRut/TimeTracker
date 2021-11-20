@@ -8,12 +8,13 @@ namespace TimeTracker.Configurations
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {
+            builder.HasKey(r => r.Id);
             builder.Property(r => r.Name)
                 .IsRequired()
                 .HasMaxLength(50);
-            builder.HasMany(p => p.ActivityTemplates)
-                .WithOne(p => p.Category)
-                .HasForeignKey(p => p.CategoryId);
+            builder.HasMany(r => r.ActivityTemplates)
+                .WithOne(r => r.Category)
+                .HasForeignKey(r => r.CategoryId);
         }
     }
 }

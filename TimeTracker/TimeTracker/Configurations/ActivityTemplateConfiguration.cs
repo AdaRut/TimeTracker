@@ -8,11 +8,12 @@ namespace TimeTracker.Configurations
     {
         public void Configure(EntityTypeBuilder<ActivityTemplate> builder)
         {
+            builder.HasKey(r => r.Id);
             builder.Property(r => r.Name)
                     .IsRequired()
                     .HasMaxLength(50);
             builder.Property(r => r.ModifiedBy)
-                .IsRequired();
+                .IsRequired(false);
             builder.Property(r => r.CreatedBy)
                 .IsRequired();
             builder.Property(r => r.CategoryId)
@@ -24,10 +25,10 @@ namespace TimeTracker.Configurations
             builder.Property(r => r.CreationDate)
                 .IsRequired();
             builder.Property(r => r.ModificationDate)
-                .IsRequired();
-            builder.HasMany(p => p.Activities)
-                .WithOne(p => p.ActivityTemplate)
-                .HasForeignKey(p => p.ActivityTemplateId)
+                .IsRequired(false);
+            builder.HasMany(r => r.Activities)
+                .WithOne(r => r.ActivityTemplate)
+                .HasForeignKey(r => r.ActivityTemplateId)
                 .OnDelete(DeleteBehavior.NoAction);
         }
     }

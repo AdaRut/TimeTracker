@@ -6,8 +6,8 @@ namespace TimeTracker.Entities
     {
         public bool IsDeleted { get; set; }
         public DateTime CreationDate { get; set; }
-        public DateTime ModificationDate { get; set; }
+        public DateTime? ModificationDate { get; set; }
         public int CreatedBy { get; set; }
-        public int ModifiedBy { get; set; }
+        public int? ModifiedBy { get; set; }
     }
 }

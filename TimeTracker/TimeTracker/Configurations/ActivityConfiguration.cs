@@ -8,12 +8,13 @@ namespace TimeTracker.Configurations
     {
         public void Configure(EntityTypeBuilder<Activity> builder)
         {
+            builder.HasKey(r => r.Id);
             builder.Property(r => r.DateFrom)
                 .IsRequired();
             builder.Property(r => r.DateTo)
                 .IsRequired();
             builder.Property(r => r.ModifiedBy)
-               .IsRequired();
+               .IsRequired(false);
             builder.Property(r => r.CreatedBy)
                 .IsRequired();
             builder.Property(r => r.ActivityTemplateId)
@@ -25,7 +26,7 @@ namespace TimeTracker.Configurations
             builder.Property(r => r.CreationDate)
                 .IsRequired();
             builder.Property(r => r.ModificationDate)
-                .IsRequired();
+                .IsRequired(false);
         }
     }
 }
