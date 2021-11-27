@@ -2,15 +2,14 @@
 using TimeTracker.DataAccess.Configurations;
 using TimeTracker.DataAccess.Entities;
 
-
 namespace TimeTracker.DataAccess
 {
     public class TimeTrackerDbContext: DbContext
     {
-        public DbSet<Activity> Activities { get; set; }
-        public DbSet<ActivityTemplate> ActivityTemplates { get; set; }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<ActivityEntity> Activities { get; set; }
+        public DbSet<ActivityTemplateEntity> ActivityTemplates { get; set; }
+        public DbSet<CategoryEntity> Categories { get; set; }
+        public DbSet<UserEntity> Users { get; set; }
 
         public TimeTrackerDbContext(DbContextOptions options) : base(options)
         {
@@ -18,10 +17,10 @@ namespace TimeTracker.DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration<Activity>(new ActivityConfiguration());
-            modelBuilder.ApplyConfiguration<ActivityTemplate>(new ActivityTemplateConfiguration());
-            modelBuilder.ApplyConfiguration<Category>(new CategoryConfiguration());
-            modelBuilder.ApplyConfiguration<User>(new UserConfiguration());
+            modelBuilder.ApplyConfiguration<ActivityEntity>(new ActivityConfiguration());
+            modelBuilder.ApplyConfiguration<ActivityTemplateEntity>(new ActivityTemplateConfiguration());
+            modelBuilder.ApplyConfiguration<CategoryEntity>(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration<UserEntity>(new UserConfiguration());
         }
     }
 }
