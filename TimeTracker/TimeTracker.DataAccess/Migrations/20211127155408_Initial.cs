@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace TimeTracker.Migrations
+namespace TimeTracker.DataAccess.Migrations
 {
-    public partial class Init : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -51,9 +51,9 @@ namespace TimeTracker.Migrations
                     UserId = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<int>(type: "int", nullable: false),
-                    ModifiedBy = table.Column<int>(type: "int", nullable: false)
+                    ModifiedBy = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -83,9 +83,9 @@ namespace TimeTracker.Migrations
                     UserId = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<int>(type: "int", nullable: false),
-                    ModifiedBy = table.Column<int>(type: "int", nullable: false)
+                    ModifiedBy = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {

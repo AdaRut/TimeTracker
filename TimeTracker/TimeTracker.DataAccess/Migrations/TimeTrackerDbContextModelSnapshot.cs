@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TimeTracker;
+using TimeTracker.DataAccess;
 
-namespace TimeTracker.Migrations
+namespace TimeTracker.DataAccess.Migrations
 {
     [DbContext(typeof(TimeTrackerDbContext))]
-    [Migration("20211119223424_Init")]
-    partial class Init
+    partial class TimeTrackerDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,7 +19,7 @@ namespace TimeTracker.Migrations
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("TimeTracker.Entities.Activity", b =>
+            modelBuilder.Entity("TimeTracker.DataAccess.Entities.Activity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -46,10 +44,10 @@ namespace TimeTracker.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("ModificationDate")
+                    b.Property<DateTime?>("ModificationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ModifiedBy")
+                    b.Property<int?>("ModifiedBy")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
@@ -64,7 +62,7 @@ namespace TimeTracker.Migrations
                     b.ToTable("Activities");
                 });
 
-            modelBuilder.Entity("TimeTracker.Entities.ActivityTemplate", b =>
+            modelBuilder.Entity("TimeTracker.DataAccess.Entities.ActivityTemplate", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -86,10 +84,10 @@ namespace TimeTracker.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("ModificationDate")
+                    b.Property<DateTime?>("ModificationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ModifiedBy")
+                    b.Property<int?>("ModifiedBy")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -109,7 +107,7 @@ namespace TimeTracker.Migrations
                     b.ToTable("ActivityTemplates");
                 });
 
-            modelBuilder.Entity("TimeTracker.Entities.Category", b =>
+            modelBuilder.Entity("TimeTracker.DataAccess.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -129,7 +127,7 @@ namespace TimeTracker.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("TimeTracker.Entities.User", b =>
+            modelBuilder.Entity("TimeTracker.DataAccess.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -171,15 +169,15 @@ namespace TimeTracker.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("TimeTracker.Entities.Activity", b =>
+            modelBuilder.Entity("TimeTracker.DataAccess.Entities.Activity", b =>
                 {
-                    b.HasOne("TimeTracker.Entities.ActivityTemplate", "ActivityTemplate")
+                    b.HasOne("TimeTracker.DataAccess.Entities.ActivityTemplate", "ActivityTemplate")
                         .WithMany("Activities")
                         .HasForeignKey("ActivityTemplateId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("TimeTracker.Entities.User", "User")
+                    b.HasOne("TimeTracker.DataAccess.Entities.User", "User")
                         .WithMany("Activities")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -190,15 +188,15 @@ namespace TimeTracker.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("TimeTracker.Entities.ActivityTemplate", b =>
+            modelBuilder.Entity("TimeTracker.DataAccess.Entities.ActivityTemplate", b =>
                 {
-                    b.HasOne("TimeTracker.Entities.Category", "Category")
+                    b.HasOne("TimeTracker.DataAccess.Entities.Category", "Category")
                         .WithMany("ActivityTemplates")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TimeTracker.Entities.User", "User")
+                    b.HasOne("TimeTracker.DataAccess.Entities.User", "User")
                         .WithMany("ActivityTemplates")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -209,17 +207,17 @@ namespace TimeTracker.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("TimeTracker.Entities.ActivityTemplate", b =>
+            modelBuilder.Entity("TimeTracker.DataAccess.Entities.ActivityTemplate", b =>
                 {
                     b.Navigation("Activities");
                 });
 
-            modelBuilder.Entity("TimeTracker.Entities.Category", b =>
+            modelBuilder.Entity("TimeTracker.DataAccess.Entities.Category", b =>
                 {
                     b.Navigation("ActivityTemplates");
                 });
 
-            modelBuilder.Entity("TimeTracker.Entities.User", b =>
+            modelBuilder.Entity("TimeTracker.DataAccess.Entities.User", b =>
                 {
                     b.Navigation("Activities");
 
