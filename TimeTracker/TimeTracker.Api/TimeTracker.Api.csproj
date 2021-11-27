@@ -16,7 +16,10 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TimeTracker.DataAccess\TimeTracker.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

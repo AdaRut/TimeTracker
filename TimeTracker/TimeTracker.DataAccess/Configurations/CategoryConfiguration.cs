@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TimeTracker.Entities;
+using TimeTracker.DataAccess.Entities;
 
-namespace TimeTracker.Configurations
+namespace TimeTracker.DataAccess.Configurations
 {
     public class CategoryConfiguration : IEntityTypeConfiguration<Category>
     {

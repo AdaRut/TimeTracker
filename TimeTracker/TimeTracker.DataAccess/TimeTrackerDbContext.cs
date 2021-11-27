@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TimeTracker.Configurations;
-using TimeTracker.Entities;
+using TimeTracker.DataAccess.Configurations;
+using TimeTracker.DataAccess.Entities;
 
-namespace TimeTracker
+
+namespace TimeTracker.DataAccess
 {
     public class TimeTrackerDbContext: DbContext
     {

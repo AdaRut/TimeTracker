@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TimeTracker.Entities
+namespace TimeTracker.DataAccess.Entities
 {
     public class EntityBase
     {
