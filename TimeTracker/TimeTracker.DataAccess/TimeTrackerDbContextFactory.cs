@@ -1,9 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace TimeTracker
 {
@@ -12,7 +8,7 @@ namespace TimeTracker
         public TimeTrackerDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<TimeTrackerDbContext>();
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TimeTrackerDb;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer("Server=localhost;Initial Catalog=TimeTrackerDb;MultipleActiveResultSets=true;Integrated Security=true");
             return new TimeTrackerDbContext(optionsBuilder.Options);
         }
     }
