@@ -7,46 +7,46 @@ namespace TimeTracker.DataAccess.Repositories.Base
 {
     public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {
-        protected TimeTrackerDbContext QuizContext { get; set; }
+        protected TimeTrackerDbContext DbContext { get; set; }
 
-        public RepositoryBase(TimeTrackerDbContext moviesContext)
+        public RepositoryBase(TimeTrackerDbContext dbContext)
         {
-            QuizContext = moviesContext;
+            this.DbContext = dbContext;
         }
 
         public void Add(T entity)
         {
-            QuizContext.Set<T>().Add(entity);
+            DbContext.Set<T>().Add(entity);
         }
 
         public void Delete(T entity)
         {
-            QuizContext.Set<T>().Remove(entity);
+            DbContext.Set<T>().Remove(entity);
         }
 
         public void Update(T entity)
         {
-            QuizContext.Set<T>().Update(entity);
+            DbContext.Set<T>().Update(entity);
         }
 
         public async Task SaveChangesAsync()
         {
-            await QuizContext.SaveChangesAsync();
+            await DbContext.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
-            return await QuizContext.Set<T>().ToListAsync();
+            return await DbContext.Set<T>().ToListAsync();
         }
 
         public async Task<T> GetByIdAsync(int id)
         {
-            return await QuizContext.Set<T>().FindAsync(id);
+            return await DbContext.Set<T>().FindAsync(id);
         }
 
         public async Task<bool> IsExistAsync(int id)
         {
-           return (await QuizContext.Set<T>().FindAsync(id)) != null;
+            return (await DbContext.Set<T>().FindAsync(id)) != null;
         }
     }
 }
