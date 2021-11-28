@@ -4,9 +4,9 @@ using TimeTracker.DataAccess.Entities;
 
 namespace TimeTracker.DataAccess.Configurations
 {
-    public class ActivityTemplateConfiguration : IEntityTypeConfiguration<ActivityTemplate>
+    public class ActivityTemplateConfiguration : IEntityTypeConfiguration<ActivityTemplateEntity>
     {
-        public void Configure(EntityTypeBuilder<ActivityTemplate> builder)
+        public void Configure(EntityTypeBuilder<ActivityTemplateEntity> builder)
         {
             builder.HasKey(r => r.Id);
             builder.Property(r => r.Name)
